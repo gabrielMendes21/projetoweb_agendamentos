@@ -42,17 +42,18 @@
             </header>
             <main>
                 <h2 class="text-center">Consultar - Contatos agendados</h2>
-                <table class="table bg-primary">
-                    <thead>
+                <table class="table align-middle bg-primary">
+                    <thead class="text-center">
                         <tr>
                             <th>Nome</th>
                             <th>Telefone</th>
                             <th>Origem</th>
                             <th>Contato</th>
                             <th>Observação</th>  
+                            <th>Ação</th>  
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
                     @foreach($agendamentos as $agendamento)
                         <tr>
                             <td>{{$agendamento->Nome}}</td>
@@ -60,6 +61,10 @@
                             <td>{{$agendamento->Origem}}</td>
                             <td>{{$agendamento->Data_contato}}</td>
                             <td>{{$agendamento->Observacao}}</td>
+                            <td>
+                                <a href="{{url("editar/$agendamento->id")}}" class="btn btn-dark">Editar</a>
+                                <a class="btn btn-danger">Excluir</a>
+                            </td>
                         </tr>
                     @endforeach 
                     </tbody>

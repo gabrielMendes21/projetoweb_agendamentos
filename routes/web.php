@@ -21,7 +21,27 @@ Route::post('/', function(Request $informacoes) {
 });
 
 Route::get('/consulta', function () {
-    $agendamento = new Agendamento();
-    $agendamentos = $agendamento::all();
+    $agendamentos = Agendamento::all();
     return view('consulta', compact('agendamentos'));
 });
+
+Route::get('editar/{id}', function($id) {
+    $agendamento = Agendamento::findOrFail($id);
+    return view('editar', compact('agendamento'));
+});
+
+Route::put('/atualizar/{id}', function(Request $informacoes, $id) {
+    $agendamento = Agendamento::findOrFail($id);
+    $agendamento->Nome = $informacoes->nome;
+    $agendamento->Telefone = $informacoes->telefone;
+    $agendamento->Origem = $informacoes->origem;
+    $agendamento->Observacao = $informacoes->observacao;
+    $agendamento->Data_contato = $informacoes->data_contato;
+    $agendamento->save();
+
+    return view('index');
+});
+
+// Route::delete('excluir', function() {
+//     return view('editar');
+// });

@@ -31,6 +31,7 @@ Route::get('editar/{id}', function($id) {
 });
 
 Route::put('/atualizar/{id}', function(Request $informacoes, $id) {
+    $agendamentos = Agendamento::all();
     $agendamento = Agendamento::findOrFail($id);
     $agendamento->Nome = $informacoes->nome;
     $agendamento->Telefone = $informacoes->telefone;
@@ -39,9 +40,12 @@ Route::put('/atualizar/{id}', function(Request $informacoes, $id) {
     $agendamento->Data_contato = $informacoes->data_contato;
     $agendamento->save();
 
-    return view('index');
+    return redirect('consulta');
 });
 
-// Route::delete('excluir', function() {
-//     return view('editar');
-// });
+Route::delete('excluir/{id}', function($id) {
+    $agendamento = Agendamento::findOrFail($id);
+    $agendamento->delete();
+
+    return redirect("consulta");
+});

@@ -42,33 +42,39 @@
             </header>
             <main>
                 <h2 class="text-center">Consultar - Contatos agendados</h2>
-                <table class="table align-middle bg-primary">
-                    <thead class="text-center">
-                        <tr>
-                            <th>Nome</th>
-                            <th>Telefone</th>
-                            <th>Origem</th>
-                            <th>Contato</th>
-                            <th>Observação</th>  
-                            <th>Ação</th>  
-                        </tr>
-                    </thead>
-                    <tbody class="text-center">
-                    @foreach($agendamentos as $agendamento)
-                        <tr>
-                            <td>{{$agendamento->Nome}}</td>
-                            <td>{{$agendamento->Telefone}}</td>
-                            <td>{{$agendamento->Origem}}</td>
-                            <td>{{$agendamento->Data_contato}}</td>
-                            <td>{{$agendamento->Observacao}}</td>
-                            <td>
-                                <a href="{{url("editar/$agendamento->id")}}" class="btn btn-dark">Editar</a>
-                                <a class="btn btn-danger">Excluir</a>
-                            </td>
-                        </tr>
-                    @endforeach 
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table align-middle bg-primary">
+                        <thead class="text-center">
+                            <tr>
+                                <th>Nome</th>
+                                <th>Telefone</th>
+                                <th>Origem</th>
+                                <th>Contato</th>
+                                <th>Observação</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                        @foreach($agendamentos as $agendamento)
+                            <tr>
+                                <td>{{$agendamento->Nome}}</td>
+                                <td>{{$agendamento->Telefone}}</td>
+                                <td>{{$agendamento->Origem}}</td>
+                                <td>{{$agendamento->Data_contato}}</td>
+                                <td>{{$agendamento->Observacao}}</td>
+                                <td class="d-flex justify-content-center gap-2">
+                                    <a href="{{url("editar/$agendamento->id")}}" class="btn btn-dark">Editar</a>
+                                    <form action="excluir/{{$agendamento->id}}" method="POST">
+                                        @csrf
+                                        @method("delete")
+                                        <button type="submit" href="{{url("excluir/$agendamento->id")}}" class="btn btn-danger">Excluir</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </main>
         </div>
     </body>
